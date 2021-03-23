@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace DataAccess.Abstract
 {
-    public interface IProductDal:IEntityRepository<Product>
+    public interface ICategoryDal:IEntityRepository<Category>
     {
-        
+ 
     }
 }

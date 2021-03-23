@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using DataAccess.Abstract;
+﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace DataAccess.Concrete.InMemory
 {
@@ -14,17 +15,27 @@ namespace DataAccess.Concrete.InMemory
         {
             _products = new List<Product>
             {
-                new Product{Id = 1, ProductName = "Masa"},
-                new Product{Id = 2, ProductName = "Sandalye"},
-                new Product{Id = 3, ProductName = "Monitor"},
-                new Product{Id = 4, ProductName = "Kasa"},
-                new Product{Id = 5, ProductName = "Hoparlor"},
+                new Product{ProductId = 1, ProductName = "Masa"},
+                new Product{ProductId = 2, ProductName = "Sandalye"},
+                new Product{ProductId = 3, ProductName = "Monitor"},
+                new Product{ProductId = 4, ProductName = "Kasa"},
+                new Product{ProductId = 5, ProductName = "Hoparlor"},
 
             };
         }
         public List<Product> GetAll()
         {
             return _products;
+        }
+
+        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Product Get(Expression<Func<Product, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
 
         public void Add(Product product)
@@ -36,9 +47,9 @@ namespace DataAccess.Concrete.InMemory
         {
             Product productToUpdate;
 
-            productToUpdate = _products.SingleOrDefault(p => p.Id == product.Id);
+            productToUpdate = _products.SingleOrDefault(p => p.ProductId == product.ProductId);
 
-            productToUpdate.Id = product.Id;
+            productToUpdate.ProductId = product.ProductId;
             productToUpdate.ProductName = product.ProductName;
 
         }
@@ -50,7 +61,7 @@ namespace DataAccess.Concrete.InMemory
 
             Product productToDelete;
 
-            productToDelete=_products.SingleOrDefault(p => p.Id == product.Id);
+            productToDelete = _products.SingleOrDefault(p => p.ProductId == product.ProductId);
             _products.Remove(productToDelete);
         }
 
